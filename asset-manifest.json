@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Arefa313.github.io/TASKIFY/static/css/main.ff04f013.css",
+    "main.js": "/Arefa313.github.io/TASKIFY/static/js/main.5c200b59.js",
+    "index.html": "/Arefa313.github.io/TASKIFY/index.html",
+    "main.ff04f013.css.map": "/Arefa313.github.io/TASKIFY/static/css/main.ff04f013.css.map",
+    "main.5c200b59.js.map": "/Arefa313.github.io/TASKIFY/static/js/main.5c200b59.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff04f013.css",
+    "static/js/main.5c200b59.js"
+  ]
+}
