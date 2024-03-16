@@ -4,6 +4,7 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdDone} from 'react-icons/md';
 import "./styles.css";
 import TodoList from './TodoList';
+import { Draggable } from 'react-beautiful-dnd';
 
 type Props={
   index:number;
@@ -84,11 +85,13 @@ const handleDelete =(id:number) =>{
 
 
   return (
-    <Draggable draggableTd={todo.id.toString()} index={index}>
-     {(provided)=>(
-        <form className='todos_single' onSubmit={(e) =>handleEdit(e, todo.id)}
+    <Draggable draggableId ={todo.id.toString()} index={index}>
+     {(provided , snapshot)=>(
+        <form className={'todos_single ${snapshot.isDragging? "drag" : "" }'} onSubmit={(e) =>handleEdit(e, todo.id)}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
+       ref = {provided.innerRef}
+        
         > 
         {
          edit ?(

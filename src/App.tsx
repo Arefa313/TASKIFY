@@ -4,7 +4,7 @@ import './App.css';
 import InputFeild from './components/InputFeild';
 import TodoList from './components/TodoList';
 import { Todo} from "./model";
-import { } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 // let name :any;
 // let age : number | string;
@@ -46,10 +46,35 @@ const [CompletedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
  };
 
-console.log(todos);
+const onDragEnd =(result: DropResult) =>{
+const {source, destination } = result;
+console.log(result);
+if(!destination) return;
+if(destination.droppableId===source.droppableId && destination.index===source.index) return;
+let add, 
+active = todos,
+Complete= CompletedTodos;
+
+if(source.droppableId ==="TodoList"){
+  add = active[source.index];
+  active.splice(source.index, 1);
+}else{
+    add = Complete[source.index];
+    Complete.splice(source.index, 1);
+  }
+
+
+  if(destination.droppableId ==="TodoList"){
+active.splice(destination.index , 0 , add);
+  }else{
+      Complete.splice(destination.index, 0 , add);
+    }
+    setCompletedTodos(Complete);
+    setTodos(active);
+}
 
   return (
-    <DragDropContext onDragEnd={() =>{}}>
+    <DragDropContext onDragEnd={onDragEnd}>
        <div className="App">
       <span className="heading">Taskify</span>
       <InputFeild todo={todo} setTodo={setTodo} handleAdd={handleAdd } />

@@ -14,34 +14,35 @@ interface Props{
 
 const TodoList: React.FC<Props> = ({todos, setTodos, completedTodos, setCompletedTodos}) => {
 
-
+   
   return (
     <div className='container'>
       <Droppable droppableId="TodosList">
         {
-          (provided)=>(
-            <div className='todos' ref={provided.innerRef}{...provided.droppableProps}>
+          (provided, snapshot)=>(
+            <div className={'todos ${snapshot.isDraggingOver ? "dragactive" : ""}'} ref={provided.innerRef} {...provided.droppableProps}>
             <span className='todos_heading'>
               Active Tasks
             </span>
             {
-              todos.map((todo.index) =>(
+              todos.map((todo ,index) =>(
                 <SingleTodo 
                 index={index}
                 todo= {todo}
                 todos={todos}
                 key = {todo.id}
                 setTodos={setTodos} />
-              ));
+              ))
               } 
+              {provided.placeholder}
           </div>
           )
         }
      
       </Droppable>
-    <Droppable dropableId="TodosRemove">
-      {(provided) =>(
-     <div className='todos remove'
+    <Droppable droppableId="TodosRemove">
+      {(provided, snapshot) =>(
+     <div className={'todos remove ${snapshot.isDraggingOver ? "dragcomplete" : ""}'}
      ref={provided.innerRef}{...provided.droppableProps}>
      <span className='todos_heading'>
          Completed Tasks
@@ -56,6 +57,7 @@ const TodoList: React.FC<Props> = ({todos, setTodos, completedTodos, setComplete
            setTodos={setCompletedTodos} />
          ))
        }
+       {provided.placeholder}
      </div>
       )}
     
